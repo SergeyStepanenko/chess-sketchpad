@@ -8,7 +8,6 @@ npm start
 * or to run dev server with webpack-dashboard run:
 ```
 npm run dev
-
 ```
 * to build run:
 ```
