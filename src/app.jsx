@@ -45,11 +45,28 @@ export default class App extends Component {
 		const {
 			cells,
 			activeFigure,
+			// figures
 		} = this.state;
 
 		const cell = cells[id];
 
 		switch (variant) {
+		case UPDATE_VARIANT_REMOVE: {
+			this.setState({
+				cells: {
+					...cells,
+					[id]: {
+						...cell,
+						figureId: null,
+						empty: true,
+					},
+				},
+				activeFigure: figureId,
+			});
+			console.log(figureId, 'removed from', id);
+			return;
+		}
+
 		case UPDATE_VARIANT_ADD: {
 			this.setState({
 				cells: {
@@ -63,25 +80,11 @@ export default class App extends Component {
 				onDrag: false,
 				activeFigure: null,
 			});
+			console.log(activeFigure, 'added to', id);
 
 			return;
 		}
 
-		case UPDATE_VARIANT_REMOVE: {
-			this.setState({
-				cells: {
-					...cells,
-					[id]: {
-						...cell,
-						figureId: null,
-						empty: true,
-					},
-				},
-				activeFigure: figureId,
-			});
-
-			return;
-		}
 		}
 	}
 
@@ -105,6 +108,7 @@ export default class App extends Component {
 							{...figures[figureId]}
 							key={index}
 							id={figureId}
+							quantity={figures[figureId].quantity}
 							handleDragStart={this.handleDragStart}
 							imageSrc={figures[figureId].imageSrc}/>)
 						}
@@ -121,9 +125,11 @@ export default class App extends Component {
 									<Cell
 										key={index}
 										onDrag={onDrag}
+										activeFigure={this.state.activeFigure}
 										handleDragStart={this.handleDragStart}
 										handleUpdateCell={this.handleUpdateCell}
 										handleCellDrag={this.handleCellDrag}
+										figures={this.state.figures}
 										{...cells[cellId]}
 									/>
 								);

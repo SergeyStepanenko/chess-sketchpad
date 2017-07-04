@@ -50,7 +50,7 @@ let letter = 65; // A
 for (let i = 0; i < 8; i++) {
 
 	for (let j = 0; j < 8; j++) {
-		  state.cellIds.push(`${j + 1}${String.fromCharCode(letter)}`);
+		state.cellIds.push(`${j + 1}${String.fromCharCode(letter)}`);
 	}
 
 	letter++;
@@ -66,9 +66,8 @@ for (let i = 0; i < state.cellIds.length; i++) {
 
 let color = false;
 for (let i = 0; i < state.cellIds.length; i++) {
-	if (!(i % 8)) {
-		color = color;
-	} else {
+
+	if ((i % 8)) {
 		color = !color;
 	}
 
@@ -86,5 +85,7 @@ for (let i = 0; i < state.figureIds.length; i++) {
 
 state.onDrag = false;
 state.activeFigure = null;
-
+state.figures.kingB.quantity = 1;
+state.figures.kingW.quantity = 1;
+console.log(state);
 export default state;

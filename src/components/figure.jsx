@@ -11,20 +11,30 @@ class Figure extends Component {
 			imageSrc,
 			id,
 			handleDragStart,
+			quantity,
 		} = this.props;
-
+// console.log(id, quantity);
 		return (
 			<div className='figure-container'>
-			<img onDragStart={handleDragStart} onDragEnd={this.dragEnd} id={id} className='chessFigureSmall' src={imageSrc}></img>
+				{
+					(quantity !== 0) && (
+						<img
+						onDragStart={handleDragStart}
+						id={id}
+						className='chessFigureSmall'
+						src={imageSrc}
+					/>)
+				}
 			</div>
 		);
 	}
 }
 
 Figure.propTypes = {
-	imageSrc: PropTypes.string.isRequired,
+	imageSrc: PropTypes.string,
 	id: PropTypes.string.isRequired,
 	handleDragStart: PropTypes.func.isRequired,
+	quantity: PropTypes.number,
 };
 
 export default Figure;

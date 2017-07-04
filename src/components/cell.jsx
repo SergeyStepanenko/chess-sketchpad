@@ -21,10 +21,20 @@ class Cell extends Component {
 			onDrag,
 			handleUpdateCell,
 			id,
+			activeFigure,
+			figures,
 		} = this.props;
 
 		if (!onDrag) {
 			return;
+		}
+
+		if (activeFigure === 'kingB' || activeFigure === 'kingW') {
+			this.setState({
+				figures: {
+					...figures[activeFigure].quantity = 0
+				}
+			});
 		}
 
 		handleUpdateCell({id, variant: UPDATE_VARIANT_ADD});
@@ -91,7 +101,9 @@ Cell.propTypes = {
 	handleUpdateCell: PropTypes.func.isRequired,
 	handleDragStart: PropTypes.func.isRequired,
 	id: PropTypes.string.isRequired,
+	activeFigure: PropTypes.string,
 	figureId: PropTypes.string,
+	figures: PropTypes.object.isRequired,
 	onDrag: PropTypes.bool.isRequired,
 	empty: PropTypes.bool.isRequired,
 	white: PropTypes.bool.isRequired,

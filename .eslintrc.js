@@ -17,12 +17,12 @@ module.exports = {
     "plugins": [
         "react",
     ],
-
     "rules": {
         "indent": [
             "error",
             "tab"
         ],
+		"no-console": "warn",
 		"react/jsx-uses-react": "error",
 	    "react/jsx-uses-vars": "error",
         "linebreak-style": [
