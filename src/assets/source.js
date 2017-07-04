@@ -29,7 +29,7 @@ const figuresSrcArr = [
 	bishopW,
 	knightW,
 	pawnW,
-]
+];
 
 state.figureIds = [
 	'kingB',
@@ -44,7 +44,7 @@ state.figureIds = [
 	'bishopW',
 	'knightW',
 	'pawnW',
-]
+];
 
 let letter = 65; // A
 for (let i = 0; i < 8; i++) {
@@ -61,7 +61,7 @@ for (let i = 0; i < state.cellIds.length; i++) {
 		id: state.cellIds[i],
 		empty: true,
 		figureId: null,
-	}
+	};
 }
 
 let color = false;
@@ -72,7 +72,7 @@ for (let i = 0; i < state.cellIds.length; i++) {
 		color = !color;
 	}
 
-	state.cells[state.cellIds[i]].white = color
+	state.cells[state.cellIds[i]].white = color;
 }
 
 state.figures = {};
@@ -81,7 +81,7 @@ for (let i = 0; i < state.figureIds.length; i++) {
 	state.figures[state.figureIds[i]] = {
 		id: state.figureIds[i],
 		imageSrc: figuresSrcArr[i]
-	}
+	};
 }
 
 state.onDrag = false;

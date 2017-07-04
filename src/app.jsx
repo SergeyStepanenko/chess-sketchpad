@@ -34,7 +34,7 @@ export default class App extends Component {
 	}
 
 
-	handleDragEnd = (e) => {
+	handleDragEnd = () => {
 		this.setState({
 			onDrag: false,
 			activeFigure: null,
@@ -50,38 +50,38 @@ export default class App extends Component {
 		const cell = cells[id];
 
 		switch (variant) {
-			case UPDATE_VARIANT_ADD: {
-				this.setState({
-					cells: {
-						...cells,
-						[id]: {
-							...cell,
-							figureId: activeFigure,
-							empty: false,
-						},
+		case UPDATE_VARIANT_ADD: {
+			this.setState({
+				cells: {
+					...cells,
+					[id]: {
+						...cell,
+						figureId: activeFigure,
+						empty: false,
 					},
-					onDrag: false,
-					activeFigure: null,
-				});
+				},
+				onDrag: false,
+				activeFigure: null,
+			});
 
-				return;
-			}
+			return;
+		}
 
-			case UPDATE_VARIANT_REMOVE: {
-				this.setState({
-					cells: {
-						...cells,
-						[id]: {
-							...cell,
-							figureId: null,
-							empty: true,
-						},
+		case UPDATE_VARIANT_REMOVE: {
+			this.setState({
+				cells: {
+					...cells,
+					[id]: {
+						...cell,
+						figureId: null,
+						empty: true,
 					},
-					activeFigure: figureId,
-				});
+				},
+				activeFigure: figureId,
+			});
 
-				return;
-			}
+			return;
+		}
 		}
 	}
 

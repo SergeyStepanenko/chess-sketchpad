@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
 	UPDATE_VARIANT_ADD,
@@ -26,7 +27,6 @@ class Cell extends Component {
 			return;
 		}
 
-		// e.stopPropagation();
 		handleUpdateCell({id, variant: UPDATE_VARIANT_ADD});
 	}
 
@@ -38,14 +38,9 @@ class Cell extends Component {
 
 	handleDragStart = (event) => {
 		const {
-			handleCellDrag,
-			handleUpdateCell,
 			handleDragStart,
-			id,
-			figureId,
 		} = this.props;
 
-	// console.log(figures);
 		handleDragStart(event);
 	}
 
@@ -56,7 +51,7 @@ class Cell extends Component {
 			handleUpdateCell,
 		} = this.props;
 
-		handleUpdateCell({id, variant: UPDATE_VARIANT_REMOVE, figureId})
+		handleUpdateCell({id, variant: UPDATE_VARIANT_REMOVE, figureId});
 		this.setState({hide: false});
 	}
 
@@ -66,10 +61,6 @@ class Cell extends Component {
 			empty,
 			figureId,
 			white,
-			handleUpdateCell,
-			src,
-			handleMouseOver,
-			handleDragStart,
 		} = this.props;
 		return (
 			<div
@@ -91,8 +82,20 @@ class Cell extends Component {
 						/>
 				) }
 			</div>
-		)
+		);
 	}
 }
+
+Cell.propTypes = {
+	handleCellDrag: PropTypes.func.isRequired,
+	handleUpdateCell: PropTypes.func.isRequired,
+	handleDragStart: PropTypes.func.isRequired,
+	id: PropTypes.string.isRequired,
+	figureId: PropTypes.string,
+	onDrag: PropTypes.bool.isRequired,
+	empty: PropTypes.bool.isRequired,
+	white: PropTypes.bool.isRequired,
+};
+
 
 export default Cell;
