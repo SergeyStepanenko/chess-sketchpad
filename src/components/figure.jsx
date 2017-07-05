@@ -13,9 +13,9 @@ class Figure extends Component {
 			handleDragStart,
 			quantity,
 		} = this.props;
-// console.log(id, quantity);
+
 		return (
-			<div className='figure-container'>
+			<div className='figure-block'>
 				{
 					(quantity !== 0) && (
 						<img

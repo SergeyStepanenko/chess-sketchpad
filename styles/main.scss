@@ -3,104 +3,97 @@ body {
   margin: 0;
 }
 
-#container {
-  display: flex;
-}
-.container {
-  display: flex;
-  width: 700px;
-  margin: 0 auto;
-  .figures-container {
-    flex: 0 0 50px;
-  }
-  .board-container {
-    margin: 15px;
-    position: relative;
-  }
-	.board {
+.global-wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	.container-wrapper {
 		display: flex;
-		flex-wrap: wrap;
-		width: 512px;
-		height: 512px;
-		div {
-			width: 64px;
-			height: 64px;
-		}
-	}
-	.digitsOnTheSide {
-    position: absolute;
-    left: -15px;
-		ul {
-			padding: 0;
-			margin: 0;
-			background-color: #c1c1c1;
-			width: 15px;
-			li {
+		.figures-container {
+			flex: 0 0 50px;
+			.chess-figures {
 				display: flex;
-				align-items: center;
+				flex-flow: column;
 				justify-content: center;
-				height: 64px;
-				list-style-type: none;
+				.figure-block {
+					width: 44px;
+					height: 44px;
+					.chessFigureSmall {
+						width: 44px;
+						height: 44px;
+						cursor: pointer;
+					}
+				}
 			}
 		}
-	}
-	.wrapper {
-		display: flex;
-		height: 512px;
-		.chess-figures {
-			display: flex;
-			flex-flow: column;
-			justify-content: center;
-		}
-	}
-	.lettersOnTopAndBottom {
-	    position: absolute;
-	    top: -15px;
-			ul {
+		.board-container {
+			margin: 15px;
+			position: relative;
+			.digitsOnTheSide {
+				position: absolute;
+				left: -15px;
+				ul {
+					padding: 0;
+					margin: 0;
+					background-color: #c1c1c1;
+					width: 15px;
+					li {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						height: 64px;
+						list-style-type: none;
+					}
+				}
+			}
+			.board {
 				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
 				width: 512px;
-				height: 15px;
-				padding: 0;
-				margin: 0;
-				background-color: #c1c1c1;
-				li {
+				height: 512px;
+				div {
+					width: 64px;
+					height: 64px;
+					.chessFigure {
+						width: 64px;
+						height: 64px;
+						cursor: pointer;
+					}
+				}
+				.white,
+				.black {
+					width: 64px;
+					height: 64px;
+					position: relative;
+				}
+
+				.white {
+					background-color: #F0D9B5;
+				}
+				.black {
+					background-color: #B58863;
+				}
+			}
+			.lettersOnTopAndBottom {
+				position: absolute;
+				top: -15px;
+				ul {
 					display: flex;
-					justify-content: center;
-					align-items: center;
-					list-style-type: none;
-					flex: 0 0 64px;
+					width: 512px;
+					height: 15px;
+					padding: 0;
+					margin: 0;
+					background-color: #c1c1c1;
+					li {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						list-style-type: none;
+						flex: 0 0 64px;
+					}
 				}
 			}
 		}
 	}
-
-.white,
-.black {
-	width: 64px;
-	height: 64px;
-	position: relative;
-}
-
-.white {
-	background-color: #F0D9B5;
-}
-.black {
-	background-color: #B58863;
-}
-
-.chessFigure {
-	width: 64px;
-	height: 64px;
-	cursor: pointer;
-}
-
-.chessFigureSmall {
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-}
-
-.figure-container {
-	width: 44px;
-	height: 44px;
 }

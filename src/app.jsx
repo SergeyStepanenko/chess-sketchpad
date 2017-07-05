@@ -4,6 +4,7 @@ import Cell from './components/cell.jsx';
 import Figure from './components/figure.jsx';
 import LeftIndexes from './components/left-indexes.jsx';
 import TopIndexes from './components/top-indexes.jsx';
+import Buttons from './components/buttons.jsx';
 import state from './assets/source.js';
 import '../styles/index.scss';
 
@@ -11,15 +12,6 @@ import {
 	UPDATE_VARIANT_ADD,
 	UPDATE_VARIANT_REMOVE,
 } from './constants/constants.js';
-
-const kings = {
-	kingB: {
-		position: null
-	},
-	kingW: {
-		position: null
-	}
-};
 
 export default class App extends Component {
 	constructor() {
@@ -134,9 +126,7 @@ export default class App extends Component {
 
 			return;
 		}
-
 		}
-		console.log('updated');
 	}
 
 	render() {
@@ -150,7 +140,7 @@ export default class App extends Component {
 
 		return (
 			<div
-				id="container"
+				className="container-wrapper"
 				>
 				<div className='figures-container'>
 					<div className='chess-figures'
@@ -188,6 +178,9 @@ export default class App extends Component {
 						</div>
 					<TopIndexes />
 				</div>
+				<Buttons
+					state={this.state}
+				/>
 			</div>
 		);
 	}
