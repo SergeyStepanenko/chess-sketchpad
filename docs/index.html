@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Chess sketchpad</title>
+	<meta name="viewport" content="width=850, initial-scale=1">
+<link href="./style.css" rel="stylesheet"></head>
+<body>
+	<div class="global-wrapper">
+		<div id="app">Loading...</div>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyBySbEtmF8feDyT1x-tMcRrCT-1zX8-Z0M",
+		authDomain: "chess-sketchpad.firebaseapp.com",
+		databaseURL: "https://chess-sketchpad.firebaseio.com",
+		projectId: "chess-sketchpad",
+		storageBucket: "",
+		messagingSenderId: "28062827591"
+	};
+	firebase.initializeApp(config);
+</script>
+<script type="text/javascript" src="./main.js"></script></body>
+</html>

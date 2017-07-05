@@ -1,0 +1,161 @@
+body {
+  background: #EDEEEE;
+  margin: 0;
+}
+
+.global-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.global-wrapper .container-wrapper {
+  display: flex;
+}
+
+.global-wrapper .container-wrapper .figures-container {
+  flex: 0 0 50px;
+}
+
+.global-wrapper .container-wrapper .figures-container .chess-figures {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.global-wrapper .container-wrapper .figures-container .chess-figures .figure-block {
+  width: 44px;
+  height: 44px;
+}
+
+.global-wrapper .container-wrapper .figures-container .chess-figures .figure-block .chessFigureSmall {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.global-wrapper .container-wrapper .board-container {
+  margin: 15px;
+  position: relative;
+}
+
+.global-wrapper .container-wrapper .board-container .digitsOnTheSide {
+  position: absolute;
+  left: -15px;
+}
+
+.global-wrapper .container-wrapper .board-container .digitsOnTheSide ul {
+  padding: 0;
+  margin: 0;
+  background-color: #c1c1c1;
+  width: 15px;
+}
+
+.global-wrapper .container-wrapper .board-container .digitsOnTheSide ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  list-style-type: none;
+}
+
+.global-wrapper .container-wrapper .board-container .board {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 512px;
+  height: 512px;
+}
+
+.global-wrapper .container-wrapper .board-container .board div {
+  width: 64px;
+  height: 64px;
+}
+
+.global-wrapper .container-wrapper .board-container .board div .chessFigure {
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+}
+
+.global-wrapper .container-wrapper .board-container .board .white,
+.global-wrapper .container-wrapper .board-container .board .black {
+  width: 64px;
+  height: 64px;
+  position: relative;
+}
+
+.global-wrapper .container-wrapper .board-container .board .white {
+  background-color: #F0D9B5;
+}
+
+.global-wrapper .container-wrapper .board-container .board .black {
+  background-color: #B58863;
+}
+
+.global-wrapper .container-wrapper .board-container .lettersOnTopAndBottom {
+  position: absolute;
+  top: -15px;
+}
+
+.global-wrapper .container-wrapper .board-container .lettersOnTopAndBottom ul {
+  display: flex;
+  width: 512px;
+  height: 15px;
+  padding: 0;
+  margin: 0;
+  background-color: #c1c1c1;
+}
+
+.global-wrapper .container-wrapper .board-container .lettersOnTopAndBottom ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  flex: 0 0 64px;
+}
+
+.global-wrapper .container-wrapper .buttons-container {
+  display: flex;
+  flex-flow: column;
+  width: 220px;
+}
+
+.global-wrapper .container-wrapper .buttons-container .save-chess-sketchpad {
+  height: 40px;
+  border: 0;
+  border-radius: 4px 4px 0 0;
+  background-color: #C1C1C1;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.17);
+  font-size: 20px;
+}
+
+.global-wrapper .container-wrapper .buttons-container .input {
+  height: 30px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.17);
+  font-size: 18px;
+}
+
+.global-wrapper .container-wrapper .buttons-container ul {
+  margin-top: 30px;
+  padding: 0;
+}
+
+.global-wrapper .container-wrapper .buttons-container ul h3 {
+  text-align: center;
+}
+
+.global-wrapper .container-wrapper .buttons-container ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+  list-style-type: none;
+  height: 30px;
+  border: 1px solid #F4F4EC;
+  background-color: #F7F7F7;
+  cursor: pointer;
+}
