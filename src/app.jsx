@@ -20,6 +20,17 @@ export default class App extends Component {
 		this.state = state;
 	}
 
+	resetState = () => {
+		this.setState({
+			cells: {
+				...state.cells
+			},
+			figures: {
+				...state.figures
+			}
+		});
+	}
+
 	updateStateFromFirebase = (state) => {
 		this.setState({
 			cells: {
@@ -191,6 +202,7 @@ export default class App extends Component {
 				</div>
 				<Buttons
 					updateState={this.updateStateFromFirebase}
+					resetState={this.resetState}
 					state={this.state}
 				/>
 			</div>

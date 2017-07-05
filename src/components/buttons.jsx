@@ -56,7 +56,6 @@ class Buttons extends Component {
 	sendData = () => {
 		const {
 			state,
-			// updateState,
 		} = this.props;
 
 		firebase.database().ref(`${this.state.value}`).set({
@@ -65,7 +64,10 @@ class Buttons extends Component {
 	}
 
 	render() {
-		const {updateState} = this.props;
+		const {
+			updateState,
+			resetState
+		} = this.props;
 
 		return (
 			<div className='buttons-container'>
@@ -83,6 +85,11 @@ class Buttons extends Component {
 					onChange={this.handleInputChange}
 				/>
 				<ul>
+					<li
+						className='etude-item'
+						onClick={resetState}>
+						Сбросить этюд
+					</li>
 					<h3>Сохраненные этюды</h3>
 					{ this.state.etudesList.map((name, index) => {
 						return (
@@ -101,7 +108,8 @@ class Buttons extends Component {
 
 Buttons.propTypes = {
 	state: PropTypes.object,
-	updateState: PropTypes.func
+	updateState: PropTypes.func,
+	resetState: PropTypes.func
 };
 
 export default Buttons;
