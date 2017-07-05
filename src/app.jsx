@@ -20,6 +20,17 @@ export default class App extends Component {
 		this.state = state;
 	}
 
+	updateStateFromFirebase = (state) => {
+		this.setState({
+			cells: {
+				...state.cells
+			},
+			figures: {
+				...state.figures
+			}
+		});
+	}
+
 	handleDragStart = (e) => {
 		this.setState({
 			onDrag: true,
@@ -179,6 +190,7 @@ export default class App extends Component {
 					<TopIndexes />
 				</div>
 				<Buttons
+					updateState={this.updateStateFromFirebase}
 					state={this.state}
 				/>
 			</div>

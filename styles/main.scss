@@ -95,5 +95,44 @@ body {
 				}
 			}
 		}
+		.buttons-container {
+			display: flex;
+			flex-flow: column;
+			width: 220px;
+			.save-chess-sketchpad {
+				height: 40px;
+				border: 0;
+				border-radius: 4px 4px 0 0;
+				background-color: #C1C1C1;
+				box-shadow: 0 1px 3px 0 rgba(0,0,0,0.17);
+				font-size: 20px;
+			}
+			.input {
+				height: 30px;
+				padding: 0 5px;
+				border: 0;
+				border-radius: 0 0 4px 4px;
+				box-shadow: 0 1px 3px 0 rgba(0,0,0,0.17);
+				font-size: 18px;
+			}
+			ul {
+				margin-top: 30px;
+				padding: 0;
+				h1 {
+					text-align: left;
+				}
+				li {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin: 5px 0;
+					list-style-type: none;
+					height: 30px;
+					border: 1px solid #F4F4EC;
+					background-color: #F7F7F7;
+					cursor: pointer;
+				}
+			}
+		}
 	}
 }
