@@ -12,6 +12,15 @@ import {
 	UPDATE_VARIANT_REMOVE,
 } from './constants/constants.js';
 
+const kings = {
+	kingB: {
+		position: null
+	},
+	kingW: {
+		position: null
+	}
+};
+
 export default class App extends Component {
 	constructor() {
 		super();
@@ -33,7 +42,6 @@ export default class App extends Component {
 		});
 	}
 
-
 	handleDragEnd = () => {
 		this.setState({
 			onDrag: false,
@@ -41,32 +49,59 @@ export default class App extends Component {
 		});
 	}
 
+	restoreKind = () => {
+		const {
+			figures
+		} = this.state;
+
+		setTimeout(() => {
+			const obj = this.state.cells;
+			const arr = [];
+
+			for (const x in obj) {
+				if (Object.prototype.hasOwnProperty.call(obj, x)) {
+					arr.push(obj[x].figureId);
+				}
+			}
+
+			if (arr.indexOf('kingB') == -1) {
+				this.setState({
+					figures: {
+						...figures,
+						kingB: {
+							id: 'kingB',
+							imageSrc: figures.kingB.imageSrc,
+							quantity: 1,
+						},
+					},
+				});
+			}
+
+			if (arr.indexOf('kingW') == -1) {
+				this.setState({
+					figures: {
+						...figures,
+						kingW: {
+							id: 'kingW',
+							imageSrc: figures.kingW.imageSrc,
+							quantity: 1,
+						},
+					},
+				});
+			}
+
+		}, 10);
+	}
+
 	handleUpdateCell = ({id, variant, figureId}) => {
 		const {
 			cells,
 			activeFigure,
-			// figures
 		} = this.state;
 
 		const cell = cells[id];
 
 		switch (variant) {
-		case UPDATE_VARIANT_REMOVE: {
-			this.setState({
-				cells: {
-					...cells,
-					[id]: {
-						...cell,
-						figureId: null,
-						empty: true,
-					},
-				},
-				activeFigure: figureId,
-			});
-			console.log(figureId, 'removed from', id);
-			return;
-		}
-
 		case UPDATE_VARIANT_ADD: {
 			this.setState({
 				cells: {
@@ -80,12 +115,32 @@ export default class App extends Component {
 				onDrag: false,
 				activeFigure: null,
 			});
-			console.log(activeFigure, 'added to', id);
+
+			this.restoreKind();
+
+			return;
+		}
+
+		case UPDATE_VARIANT_REMOVE: {
+			this.setState({
+				cells: {
+					...cells,
+					[id]: {
+						...cell,
+						figureId: null,
+						empty: true,
+					},
+				},
+				activeFigure: figureId,
+			});
+
+			this.restoreKind();
 
 			return;
 		}
 
 		}
+		console.log('updated');
 	}
 
 	render() {

@@ -87,5 +87,5 @@ state.onDrag = false;
 state.activeFigure = null;
 state.figures.kingB.quantity = 1;
 state.figures.kingW.quantity = 1;
-console.log(state);
+// console.log(state);
 export default state;
