@@ -50,10 +50,6 @@ export default class App extends Component {
 	}
 
 	restoreKind = () => {
-		const {
-			figures
-		} = this.state;
-
 		setTimeout(() => {
 			const obj = this.state.cells;
 			const arr = [];
@@ -67,10 +63,10 @@ export default class App extends Component {
 			if (arr.indexOf('kingB') == -1) {
 				this.setState({
 					figures: {
-						...figures,
+						...this.state.figures,
 						kingB: {
 							id: 'kingB',
-							imageSrc: figures.kingB.imageSrc,
+							imageSrc: this.state.figures.kingB.imageSrc,
 							quantity: 1,
 						},
 					},
@@ -80,10 +76,10 @@ export default class App extends Component {
 			if (arr.indexOf('kingW') == -1) {
 				this.setState({
 					figures: {
-						...figures,
+						...this.state.figures,
 						kingW: {
 							id: 'kingW',
-							imageSrc: figures.kingW.imageSrc,
+							imageSrc: this.state.figures.kingW.imageSrc,
 							quantity: 1,
 						},
 					},
