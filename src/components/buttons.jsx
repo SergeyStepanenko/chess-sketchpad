@@ -18,7 +18,7 @@ class Buttons extends Component {
 		};
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		rootRef.on('value', (snap) => {
 			const Obj = snap.val();
 
