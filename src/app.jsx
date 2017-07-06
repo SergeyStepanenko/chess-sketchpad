@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
+import Buttons from './components/buttons.jsx';
 import Cell from './components/cell.jsx';
 import Figure from './components/figure.jsx';
 import LeftIndexes from './components/left-indexes.jsx';
 import TopIndexes from './components/top-indexes.jsx';
-import Buttons from './components/buttons.jsx';
-import state from './assets/source.js';
+import STATE from './assets/source.js';
 import '../styles/index.scss';
 
 import {
@@ -17,16 +17,16 @@ export default class App extends Component {
 	constructor() {
 		super();
 
-		this.state = state;
+		this.state = STATE;
 	}
 
 	resetState = () => {
 		this.setState({
 			cells: {
-				...state.cells
+				...STATE.cells
 			},
 			figures: {
-				...state.figures
+				...STATE.figures
 			}
 		});
 	}

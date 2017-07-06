@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+/* eslint-disable */
 const database = firebase.database();
 const rootRef = database.ref('/');
-
-class Etude extends Component {
+/* eslint-enable */
+class EtudeBtn extends Component {
 
 	updateState = (event) => {
 		const {updateState} = this.props;
@@ -31,9 +31,9 @@ class Etude extends Component {
 	}
 }
 
-Etude.propTypes = {
+EtudeBtn.propTypes = {
 	name: PropTypes.string,
 	updateState: PropTypes.func,
 };
 
-export default Etude;
+export default EtudeBtn;

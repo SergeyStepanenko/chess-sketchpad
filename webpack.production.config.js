@@ -18,6 +18,7 @@ module.exports = {
 	],
 	output: {
 		publicPath: './',
+		// eslint-disable-next-line
 		path: path.join(__dirname, 'public'),
 		filename: '[name].js'
 	},

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Etude from './etude.jsx';
-
+import EtudeBtn from './etudeBtn.jsx';
+/* eslint-disable */
 const database = firebase.database();
 const rootRef = database.ref('/');
+/* eslint-enable */
 let FIREBASEDATA = [];
 
 class Buttons extends Component {
@@ -17,7 +18,7 @@ class Buttons extends Component {
 		};
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		rootRef.on('value', (snap) => {
 			const Obj = snap.val();
 
@@ -57,7 +58,7 @@ class Buttons extends Component {
 		const {
 			state,
 		} = this.props;
-
+		// eslint-disable-next-line
 		firebase.database().ref(`${this.state.value}`).set({
 			state
 		});
@@ -93,7 +94,7 @@ class Buttons extends Component {
 					<h3>Сохраненные этюды</h3>
 					{ this.state.etudesList.map((name, index) => {
 						return (
-							<Etude
+							<EtudeBtn
 								key={index}
 								name={name}
 								updateState={updateState}
