@@ -1,43 +1,52 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-	UPDATE_VARIANT_ADD,
-	UPDATE_VARIANT_REMOVE,
-} from '../constants/constants.js';
-
-import state from '../assets/source.js';
+import { UPDATE_CELL_ADD, UPDATE_CELL_REMOVE } from '../constants/constants';
 
 class Cell extends Component {
 	state = {
 		hide: false,
 	}
 
-	handleMouseOver = (event) => {
-		event.dataTransfer.dropEffect = null;
-		event.preventDefault();
-
+	handleDrop = (e) => {
+		e.dataTransfer.dropEffect = null;
+		e.preventDefault();
 		const {
 			onDrag,
-			handleUpdateCell,
+			handleDragEnd,
+			removeKing,
 			id,
 			activeFigure,
-			figures,
+			handleUpdateCell,
 		} = this.props;
 
 		if (!onDrag) {
 			return;
 		}
 
-		if (activeFigure === 'kingB' || activeFigure === 'kingW') {
-			this.setState({
-				figures: {
-					...figures[activeFigure].quantity = 0
-				}
-			});
+		handleDragEnd();
+		handleUpdateCell({variant: UPDATE_CELL_ADD, id, activeFigure});
+
+		if ((activeFigure === 'kingB' &&  this.props.figures.kingB.quantity === 1) || (activeFigure === 'kingW' && this.props.figures.kingW.quantity === 1)) {
+			removeKing(activeFigure);
 		}
 
-		handleUpdateCell({id, variant: UPDATE_VARIANT_ADD});
+		this.handleRestoreKing();
+	}
+
+	handleRestoreKing = () => {
+		setTimeout(() => {
+			const { restoreKing, cells } = this.props;
+			const arr = [];
+			Object.keys(cells).map(id => (cells[id].figureId !== null) ? arr.push(cells[id].figureId) : '');
+
+			if (this.props.figures.kingB.quantity === 0 && arr.indexOf('kingB') === -1) {
+				restoreKing('kingB');
+			}
+			if (this.props.figures.kingW.quantity === 0 && arr.indexOf('kingW') === -1) {
+				restoreKing('kingW');
+			}
+		}, 0);
 	}
 
 	handleDrag = () => {
@@ -46,22 +55,17 @@ class Cell extends Component {
 		this.setState({hide: true});
 	}
 
-	handleDragStart = (event) => {
-		const {
-			handleDragStart,
-		} = this.props;
+	handleDragStart = (e) => {
+		const { handleDragStart } = this.props;
 
-		handleDragStart(event);
+		handleDragStart(e);
 	}
 
-	handleDragEnd = () => {
-		const {
-			id,
-			figureId,
-			handleUpdateCell,
-		} = this.props;
+	handleDragEnd = (e) => {
+		const { handleUpdateCell, id } = this.props;
 
-		handleUpdateCell({id, variant: UPDATE_VARIANT_REMOVE, figureId});
+		this.handleRestoreKing();
+		handleUpdateCell({variant: UPDATE_CELL_REMOVE, id, e});
 		this.setState({hide: false});
 	}
 
@@ -71,14 +75,15 @@ class Cell extends Component {
 			empty,
 			figureId,
 			white,
+			figures,
 		} = this.props;
 		return (
 			<div
 				id={id}
 				className={(white) ? 'white' : 'black'}
-				onDrop={this.handleMouseOver}
-				onDragOver={(event) =>  event.preventDefault()}
-				onDragEnter={(event) =>  event.preventDefault()}
+				onDrop={this.handleDrop}
+				onDragOver={(event) => event.preventDefault()}
+				onDragEnter={(event) => event.preventDefault()}
 				>
 				{ !empty && (
 					<img
@@ -86,7 +91,7 @@ class Cell extends Component {
 						onDrag={this.handleDrag}
 						onDragEnd={this.handleDragEnd}
 						className='chessFigure'
-						src={state.figures[figureId].imageSrc}
+						src={figures[figureId].imageSrc}
 						id={figureId}
 						style={{visibility: this.state.hide ? 'hidden' : 'visible'}}
 						/>
@@ -97,17 +102,20 @@ class Cell extends Component {
 }
 
 Cell.propTypes = {
-	handleCellDrag: PropTypes.func.isRequired,
-	handleUpdateCell: PropTypes.func.isRequired,
-	handleDragStart: PropTypes.func.isRequired,
-	id: PropTypes.string.isRequired,
+	handleCellDrag: PropTypes.func,
+	handleUpdateCell: PropTypes.func,
+	handleDragStart: PropTypes.func,
+	removeKing: PropTypes.func,
+	restoreKing: PropTypes.func,
+	id: PropTypes.string,
 	activeFigure: PropTypes.string,
 	figureId: PropTypes.string,
-	figures: PropTypes.object.isRequired,
-	onDrag: PropTypes.bool.isRequired,
-	empty: PropTypes.bool.isRequired,
-	white: PropTypes.bool.isRequired,
+	figures: PropTypes.object,
+	cells: PropTypes.object,
+	onDrag: PropTypes.bool,
+	empty: PropTypes.bool,
+	white: PropTypes.bool,
+	handleDragEnd: PropTypes.func,
 };
-
 
 export default Cell;

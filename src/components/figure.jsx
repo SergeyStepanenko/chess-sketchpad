@@ -11,6 +11,7 @@ class Figure extends Component {
 			imageSrc,
 			id,
 			handleDragStart,
+			handleDragEnd,
 			quantity,
 		} = this.props;
 
@@ -20,6 +21,7 @@ class Figure extends Component {
 					(quantity !== 0) && (
 						<img
 						onDragStart={handleDragStart}
+						onDragEnd={handleDragEnd}
 						id={id}
 						className='chessFigureSmall'
 						src={imageSrc}
@@ -32,8 +34,9 @@ class Figure extends Component {
 
 Figure.propTypes = {
 	imageSrc: PropTypes.string,
-	id: PropTypes.string.isRequired,
-	handleDragStart: PropTypes.func.isRequired,
+	id: PropTypes.string,
+	handleDragStart: PropTypes.func,
+	handleDragEnd: PropTypes.func,
 	quantity: PropTypes.number,
 };
 
