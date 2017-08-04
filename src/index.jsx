@@ -1,23 +1,3 @@
-// import React from 'react';
-// import { render } from 'react-dom';
-// import { AppContainer } from 'react-hot-loader';
-// import App from './app.jsx';
-//
-// render( <AppContainer><App/></AppContainer>, document.querySelector('#app'));
-//
-// if (module && module.hot) {
-// 	module.hot.accept('./app.jsx', () => {
-// 		const App = require('./app.jsx').default;
-//
-// 		render(
-// 		<AppContainer>
-// 		<App/>
-// 		</AppContainer>,
-// 			document.querySelector('#app')
-// 		);
-// 	});
-// }
-
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
@@ -32,7 +12,7 @@ render(
 			<App/>
 		</Provider>
 	</AppContainer>,
-	document.querySelector('#app'));
+	document.getElementById('app'));
 
 if (module && module.hot) {
 	module.hot.accept('./container/app.jsx', () => {
@@ -44,7 +24,7 @@ if (module && module.hot) {
 				<App/>
 			</Provider>
 		</AppContainer>,
-			document.querySelector('#app')
+			document.getElementById('app')
 		);
 	});
 }

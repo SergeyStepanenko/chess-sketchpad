@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import reducer from './reducers/reducer';
 
@@ -6,5 +7,5 @@ export default createStore(
 	combineReducers(
 		{ reducer }),
 		{},
-		applyMiddleware(createLogger())
+		composeWithDevTools(applyMiddleware(createLogger()))
 	);

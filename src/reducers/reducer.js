@@ -25,7 +25,6 @@ const reducer = (state = STATE, action) => {
 					empty: false
 				}
 			},
-			// activeFigure: null,
 			onDrag: false
 		};
 	case 'UPDATE_CELL_REMOVE':

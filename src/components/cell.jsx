@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { UPDATE_CELL_ADD, UPDATE_CELL_REMOVE } from '../constants/constants';
 
-class Cell extends Component {
+export default class Cell extends Component {
 	state = {
 		hide: false,
 	}
@@ -18,35 +18,20 @@ class Cell extends Component {
 			id,
 			activeFigure,
 			handleUpdateCell,
+			figures
 		} = this.props;
 
-		if (!onDrag) {
-			return;
-		}
+		if (!onDrag) return;
 
-		handleDragEnd();
 		handleUpdateCell({variant: UPDATE_CELL_ADD, id, activeFigure});
 
-		if ((activeFigure === 'kingB' &&  this.props.figures.kingB.quantity === 1) || (activeFigure === 'kingW' && this.props.figures.kingW.quantity === 1)) {
+		if ((activeFigure === 'kingB' &&  figures.kingB.quantity === 1) ||
+			(activeFigure === 'kingW' && figures.kingW.quantity === 1)) {
 			removeKing(activeFigure);
+			handleDragEnd();
 		}
 
-		this.handleRestoreKing();
-	}
-
-	handleRestoreKing = () => {
-		setTimeout(() => {
-			const { restoreKing, cells } = this.props;
-			const arr = [];
-			Object.keys(cells).map(id => (cells[id].figureId !== null) ? arr.push(cells[id].figureId) : '');
-
-			if (this.props.figures.kingB.quantity === 0 && arr.indexOf('kingB') === -1) {
-				restoreKing('kingB');
-			}
-			if (this.props.figures.kingW.quantity === 0 && arr.indexOf('kingW') === -1) {
-				restoreKing('kingW');
-			}
-		}, 0);
+		this.checkKing();
 	}
 
 	handleDrag = () => {
@@ -55,18 +40,29 @@ class Cell extends Component {
 		this.setState({hide: true});
 	}
 
-	handleDragStart = (e) => {
-		const { handleDragStart } = this.props;
+	handleDragEnd = (e) => {
+		const { handleUpdateCell, id, handleDragEnd } = this.props;
 
-		handleDragStart(e);
+		this.checkKing();
+		handleUpdateCell({variant: UPDATE_CELL_REMOVE, id, e});
+
+		this.setState({hide: false});
+		handleDragEnd();
 	}
 
-	handleDragEnd = (e) => {
-		const { handleUpdateCell, id } = this.props;
+	checkKing = () => {
+		setTimeout(() => {
+			const { restoreKing, cells, figures } = this.props;
+			const kings = [];
 
-		this.handleRestoreKing();
-		handleUpdateCell({variant: UPDATE_CELL_REMOVE, id, e});
-		this.setState({hide: false});
+			Object.keys(cells).map(id => {
+				let figure = cells[id].figureId;
+				figure === 'kingB' || figure === 'kingW' ? kings.push(cells[id].figureId) : '';
+			});
+
+			if (figures.kingB.quantity === 0 && kings.indexOf('kingB') === -1) restoreKing('kingB');
+			if (figures.kingW.quantity === 0 && kings.indexOf('kingW') === -1) restoreKing('kingW');
+		}, 0);
 	}
 
 	render() {
@@ -76,7 +72,9 @@ class Cell extends Component {
 			figureId,
 			white,
 			figures,
+			handleDragStart,
 		} = this.props;
+
 		return (
 			<div
 				id={id}
@@ -87,14 +85,15 @@ class Cell extends Component {
 				>
 				{ !empty && (
 					<img
-						onDragStart={this.handleDragStart}
+						// onDragStart={this.handleDragStart}
+						onDragStart={(e) => handleDragStart(e)}
 						onDrag={this.handleDrag}
 						onDragEnd={this.handleDragEnd}
 						className='chessFigure'
 						src={figures[figureId].imageSrc}
 						id={figureId}
 						style={{visibility: this.state.hide ? 'hidden' : 'visible'}}
-						/>
+					/>
 				) }
 			</div>
 		);
@@ -117,5 +116,3 @@ Cell.propTypes = {
 	white: PropTypes.bool,
 	handleDragEnd: PropTypes.func,
 };
-
-export default Cell;
