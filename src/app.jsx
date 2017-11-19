@@ -63,44 +63,41 @@ export default class App extends Component {
 		});
 	}
 
-	restoreKind = () => {
-		setTimeout(() => {
-			const obj = this.state.cells;
-			const arr = [];
+	restoreKing = () => {
+		const obj = this.state.cells;
+		const arr = [];
 
-			for (const x in obj) {
-				if (Object.prototype.hasOwnProperty.call(obj, x)) {
-					arr.push(obj[x].figureId);
-				}
+		for (const x in obj) {
+			if (Object.prototype.hasOwnProperty.call(obj, x)) {
+				arr.push(obj[x].figureId);
 			}
+		}
 
-			if (arr.indexOf('kingB') == -1) {
-				this.setState({
-					figures: {
-						...this.state.figures,
-						kingB: {
-							id: 'kingB',
-							imageSrc: this.state.figures.kingB.imageSrc,
-							quantity: 1,
-						},
+		if (arr.indexOf('kingB') == -1) {
+			this.setState({
+				figures: {
+					...this.state.figures,
+					kingB: {
+						id: 'kingB',
+						imageSrc: this.state.figures.kingB.imageSrc,
+						quantity: 1,
 					},
-				});
-			}
+				},
+			});
+		}
 
-			if (arr.indexOf('kingW') == -1) {
-				this.setState({
-					figures: {
-						...this.state.figures,
-						kingW: {
-							id: 'kingW',
-							imageSrc: this.state.figures.kingW.imageSrc,
-							quantity: 1,
-						},
+		if (arr.indexOf('kingW') == -1) {
+			this.setState({
+				figures: {
+					...this.state.figures,
+					kingW: {
+						id: 'kingW',
+						imageSrc: this.state.figures.kingW.imageSrc,
+						quantity: 1,
 					},
-				});
-			}
-
-		}, 10);
+				},
+			});
+		}
 	}
 
 	handleUpdateCell = ({id, variant, figureId}) => {
@@ -124,9 +121,9 @@ export default class App extends Component {
 				},
 				onDrag: false,
 				activeFigure: null,
+			}, () => {
+				this.restoreKing();
 			});
-
-			this.restoreKind();
 
 			return;
 		}
@@ -142,9 +139,9 @@ export default class App extends Component {
 					},
 				},
 				activeFigure: figureId,
+			}, () => {
+				this.restoreKing();
 			});
-
-			this.restoreKind();
 
 			return;
 		}
@@ -167,13 +164,14 @@ export default class App extends Component {
 				<div className='figures-container'>
 					<div className='chess-figures'
 						>
-						{ figureIds.map((figureId, index) => <Figure
-							{...figures[figureId]}
-							key={index}
-							id={figureId}
-							quantity={figures[figureId].quantity}
-							handleDragStart={this.handleDragStart}
-							imageSrc={figures[figureId].imageSrc}/>)
+						{ figureIds.map((figureId, index) =>
+							<Figure
+								{...figures[figureId]}
+								key={index}
+								id={figureId}
+								quantity={figures[figureId].quantity}
+								handleDragStart={this.handleDragStart}
+								imageSrc={figures[figureId].imageSrc}/>)
 						}
 					</div>
 				</div>
