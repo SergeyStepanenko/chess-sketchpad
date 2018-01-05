@@ -4,9 +4,13 @@ import { fromJS } from 'immutable';
 const reducer = (state = fromJS(STATE), action) => {
 	switch (action.type) {
 	case 'DRAG_START':
-		return state.set('onDrag', true).set('activeFigure', action.payload);
+		return state
+			.set('onDrag', true)
+			.set('activeFigure', action.payload);
 	case 'DRAG_END':
-		return state.set('onDrag', false).set('activeFigure', null);
+		return state
+			.set('onDrag', false)
+			.set('activeFigure', null);
 	case 'UPDATE_CELL_ADD':
 		return state
 			.setIn([ 'cells', action.payload.id, 'figureId' ],  action.payload.activeFigure)
