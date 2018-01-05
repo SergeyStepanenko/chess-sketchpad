@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { toJS } from 'immutable';
 
 import * as actions from '../actions';
 import Cell from '../components/cell.jsx';
@@ -9,7 +10,7 @@ import LeftIndexes from '../components/left-indexes.jsx';
 import TopIndexes from '../components/top-indexes.jsx';
 import '../../styles/index.scss';
 
-@connect(state => ({ ...state.reducer }), { ...actions })
+@connect(state => ({ ...state.reducer.toJS() }), { ...actions })
 export default class App extends Component {
 	constructor() {
 		super();

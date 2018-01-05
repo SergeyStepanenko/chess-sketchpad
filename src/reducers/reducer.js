@@ -1,68 +1,27 @@
 import STATE from '../assets/source';
+import { fromJS } from 'immutable';
 
-const reducer = (state = STATE, action) => {
+const reducer = (state = fromJS(STATE), action) => {
 	switch (action.type) {
 	case 'DRAG_START':
-		return state = {
-			...state,
-			onDrag: true,
-			activeFigure: action.payload,
-		};
+		return state.set('onDrag', true).set('activeFigure', action.payload);
 	case 'DRAG_END':
-		return state = {
-			...state,
-			onDrag: false,
-			activeFigure: null,
-		};
+		return state.set('onDrag', false).set('activeFigure', null);
 	case 'UPDATE_CELL_ADD':
-		return state = {
-			...state,
-			cells: {
-				...state.cells,
-				[action.payload.id]: {
-					...state.cells[action.payload.id],
-					figureId: action.payload.activeFigure,
-					empty: false
-				}
-			},
-			onDrag: false
-		};
+		return state
+			.updateIn([ 'cells', action.payload.id, 'figureId' ], () => action.payload.activeFigure)
+			.updateIn([ 'cells', action.payload.id, 'empty' ], () => false)
+			.set('onDrag', false);
 	case 'UPDATE_CELL_REMOVE':
-		return state = {
-			...state,
-			cells: {
-				...state.cells,
-				[action.payload.id]: {
-					...state.cells[action.payload.id],
-					figureId: null,
-					empty: true
-				}
-			},
-			activeFigure: null,
-			onDrag: false
-		};
+		return state
+			.updateIn([ 'cells', action.payload.id, 'figureId' ], () => null)
+			.updateIn([ 'cells', action.payload.id, 'empty' ], () => true)
+			.set('activeFigure', null)
+			.set('onDrag', false);
 	case 'REMOVE_KING':
-		return state = {
-			...state,
-			figures: {
-				...state.figures,
-				[action.payload]: {
-					...state.figures[action.payload],
-					quantity: 0
-				}
-			}
-		};
+		return state.updateIn([ 'figures', action.payload, 'quantity' ], () => 0);
 	case 'RESTORE_KING':
-		return state = {
-			...state,
-			figures: {
-				...state.figures,
-				[action.payload]: {
-					...state.figures[action.payload],
-					quantity: 1
-				}
-			}
-		};
+		return state.updateIn([ 'figures', action.payload, 'quantity' ], () => 1);
 	default:
 		return state;
 	}

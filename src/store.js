@@ -7,5 +7,9 @@ export default createStore(
 	combineReducers(
 		{ reducer }),
 		{},
-		composeWithDevTools(applyMiddleware(createLogger()))
+		composeWithDevTools(applyMiddleware(
+			createLogger({
+				collapsed: true,
+				stateTransformer: state => ({ ...state.reducer.toJS() })
+			})))
 	);
