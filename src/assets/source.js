@@ -14,6 +14,8 @@ import rookW from '../../images/rookW.png';
 const STATE = {
 	cellIds: [],
 	cells: {},
+	onDrag: false,
+	activeFigure: null,
 };
 
 const figuresSrcArr = [
@@ -32,13 +34,13 @@ const figuresSrcArr = [
 ];
 
 // генерируем id для доски А1 -> B2 -> и т.д.
-let letter = 65; // A
+let ordinalLetterNumber = 65; // A
 for (let i = 0; i < 8; i++) {
 	for (let j = 0; j < 8; j++) {
-		STATE.cellIds.push(`${j + 1}${String.fromCharCode(letter)}`);
+		STATE.cellIds.push(`${j + 1}${String.fromCharCode(ordinalLetterNumber)}`);
 	}
 
-	letter++;
+	ordinalLetterNumber++;
 }
 
 // генерируем объект cells
@@ -70,16 +72,13 @@ STATE.figureIds = [
 ];
 
 STATE.figures = {};
-
-for (let i = 0; i < STATE.figureIds.length; i++) {
-	STATE.figures[STATE.figureIds[i]] = {
-		id: STATE.figureIds[i],
-		imageSrc: figuresSrcArr[i]
-	};
-}
-
-STATE.onDrag = false;
-STATE.activeFigure = null;
+STATE.figures = STATE.figureIds.reduce((res, acc, index) =>
+({ ...res,
+	[acc]: {
+		id: acc,
+		imageSrc: figuresSrcArr[index],
+	}
+}), {});
 
 // задаем кол-во допустимых королей на доске
 STATE.figures.kingB.quantity = 1;
