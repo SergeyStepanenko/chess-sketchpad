@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Figure extends Component {
-	constructor() {
-		super();
-	}
-
 	render() {
 		const {
 			imageSrc,
@@ -15,18 +11,19 @@ class Figure extends Component {
 			quantity,
 		} = this.props;
 
+		const figureImg = quantity !== 0 ? (
+			<img
+				onDragStart={handleDragStart}
+				onDragEnd={handleDragEnd}
+				id={id}
+				className='chessFigureSmall'
+				src={imageSrc}
+			/>
+		) : null;
+
 		return (
 			<div className='figure-block'>
-				{
-					(quantity !== 0) && (
-						<img
-						onDragStart={handleDragStart}
-						onDragEnd={handleDragEnd}
-						id={id}
-						className='chessFigureSmall'
-						src={imageSrc}
-					/>)
-				}
+				{figureImg}
 			</div>
 		);
 	}

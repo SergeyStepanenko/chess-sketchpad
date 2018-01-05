@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { toJS } from 'immutable';
 
 import * as actions from '../actions';
 import Cell from '../components/cell.jsx';

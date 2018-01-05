@@ -20,7 +20,7 @@ module.exports = {
 		'react-hot-loader/patch',
 		'./src/index.jsx',
 	],
-	devtool: 'source-map',
+	devtool: 'eval',
 	output: {
 		publicPath: '/',
 		// eslint-disable-next-line
