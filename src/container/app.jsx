@@ -2,35 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { handleDragStart, handleDragEnd, handleUpdateCell, removeKing, restoreKing } from '../actions';
-// import Buttons from '../components/buttons.jsx';
+import * as actions from '../actions';
 import Cell from '../components/cell.jsx';
 import Figure from '../components/figure.jsx';
 import LeftIndexes from '../components/left-indexes.jsx';
 import TopIndexes from '../components/top-indexes.jsx';
 import '../../styles/index.scss';
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		handleDragStart: (e) => {
-			dispatch(handleDragStart(e));
-		},
-		handleDragEnd: () => {
-			dispatch(handleDragEnd());
-		},
-		handleUpdateCell: ({variant, id, activeFigure}) => {
-			dispatch(handleUpdateCell({variant, id, activeFigure}));
-		},
-		removeKing: (activeFigure) => {
-			dispatch(removeKing(activeFigure));
-		},
-		restoreKing: (king) => {
-			dispatch(restoreKing(king));
-		},
-	};
-};
-
-@connect(state => ({...state.reducer}), mapDispatchToProps)
+@connect(state => ({ ...state.reducer }), { ...actions })
 export default class App extends Component {
 	constructor() {
 		super();

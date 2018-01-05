@@ -17,13 +17,13 @@ export function handleUpdateCell({variant, id, activeFigure}) {
 	if (variant === types.UPDATE_CELL_ADD) {
 		return ({
 			type: types.UPDATE_CELL_ADD,
-			payload: {id: id, activeFigure: activeFigure}
+			payload: {id, activeFigure}
 		});
 	}
 	if (variant === types.UPDATE_CELL_REMOVE) {
 		return ({
 			type: types.UPDATE_CELL_REMOVE,
-			payload: {id: id, activeFigure: activeFigure}
+			payload: {id, activeFigure}
 		});
 	}
 }
