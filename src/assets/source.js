@@ -34,31 +34,24 @@ const figuresSrcArr = [
 // генерируем id для доски А1 -> B2 -> и т.д.
 let letter = 65; // A
 for (let i = 0; i < 8; i++) {
-
 	for (let j = 0; j < 8; j++) {
 		STATE.cellIds.push(`${j + 1}${String.fromCharCode(letter)}`);
 	}
 
 	letter++;
 }
+
 // генерируем объект cells
-for (let i = 0; i < STATE.cellIds.length; i++) {
-	STATE.cells[STATE.cellIds[i]] = {
-		id: STATE.cellIds[i],
+let color = false;
+STATE.cells = STATE.cellIds.reduce((res, acc, index) =>
+({ ...res,
+	[acc]: {
+		id: acc,
 		empty: true,
 		figureId: null,
-	};
-}
-// добавляем в объект cell значение цвета (white = true, black = false)
-let color = false;
-for (let i = 0; i < STATE.cellIds.length; i++) {
-
-	if ((i % 8)) {
-		color = !color;
+		white: index % 8 ? color = !color : color, // добавляем значение цвета (true = white, false = black )
 	}
-
-	STATE.cells[STATE.cellIds[i]].white = color;
-}
+}), {});
 
 // создаем объект фигурок с id и путем до картинок
 STATE.figureIds = [
